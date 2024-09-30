@@ -73,8 +73,14 @@ namespace EFDEMO
             var cliente = crearCliente();
             cr.UpdateCliente(cliente);
             var resultado = cr.ObtenerPorID(cliente.CustomerID);
-            List<Customers> customers = new List<Customers> { resultado };
+            List<Customers> lista1 = new List<Customers> { resultado };
             dgvCustomers.DataSource = lista1;
+        }
+
+        private void btnEliminar_Click(object sender, EventArgs e)
+        {
+            var eliminadas = cr.DeleteCliente(tboxCustomerID.Text);
+            MessageBox.Show($"Se elimino {eliminadas} filas");
         }
     }
 }
