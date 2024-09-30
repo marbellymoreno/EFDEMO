@@ -67,5 +67,14 @@ namespace EFDEMO
                 tboxContactTitle.Text = customers.ContactTitle;
             }
         }
+
+        private void btnActualizar_Click(object sender, EventArgs e)
+        {
+            var cliente = crearCliente();
+            cr.UpdateCliente(cliente);
+            var resultado = cr.ObtenerPorID(cliente.CustomerID);
+            List<Customers> customers = new List<Customers> { resultado };
+            dgvCustomers.DataSource = lista1;
+        }
     }
 }
