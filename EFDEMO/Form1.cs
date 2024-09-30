@@ -73,14 +73,23 @@ namespace EFDEMO
             var cliente = crearCliente();
             cr.UpdateCliente(cliente);
             var resultado = cr.ObtenerPorID(cliente.CustomerID);
-            List<Customers> lista1 = new List<Customers> { resultado };
-            dgvCustomers.DataSource = lista1;
+            if (resultado != null)
+            {
+                List<Customers> lista1 = new List<Customers> { resultado };
+                dgvCustomers.DataSource = lista1;
+            }
+            else
+            {
+                MessageBox.Show("Error: No se encontró el cliente actualizado.");
+            }
         }
+
 
         private void btnEliminar_Click(object sender, EventArgs e)
         {
             var eliminadas = cr.DeleteCliente(tboxCustomerID.Text);
             MessageBox.Show($"Se elimino {eliminadas} filas");
+            dgvCustomers.DataSource = cr.ObtenerTodos();
         }
     }
 }
